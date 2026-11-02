@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b172a">
+  <title>{% block title %}Air Traffic Control{% endblock %} | ATC Network</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  {% block head %}{% endblock %}
+</head>
+<body data-page="{{ page }}">
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="{{ url_for('dashboard') }}">
+        <span class="brand-icon"><i class="fa-solid fa-plane-up"></i></span>
+        <span><strong>AIR TRAFFIC</strong><small>ROUTE MANAGER</small></span>
+      </a>
+      <div class="nav-label">MENU</div>
+      <nav class="main-nav" aria-label="Main navigation">
+        <a class="nav-link {{ 'active' if page == 'dashboard' else '' }}" href="{{ url_for('dashboard') }}" {{ 'aria-current=page' if page == 'dashboard' else '' }}><i class="fa-solid fa-grid-2"></i><span>Dashboard</span></a>
+        <a class="nav-link {{ 'active' if page == 'airports' else '' }}" href="{{ url_for('airport_page') }}" {{ 'aria-current=page' if page == 'airports' else '' }}><i class="fa-solid fa-tower-observation"></i><span>Airports</span></a>
+        <a class="nav-link {{ 'active' if page == 'routes' else '' }}" href="{{ url_for('routes_page') }}" {{ 'aria-current=page' if page == 'routes' else '' }}><i class="fa-solid fa-route"></i><span>Routes</span></a>
+        <a class="nav-link {{ 'active' if page == 'analytics' else '' }}" href="{{ url_for('analytics_page') }}" {{ 'aria-current=page' if page == 'analytics' else '' }}><i class="fa-solid fa-chart-line"></i><span>Analytics</span></a>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="sidebar-footer"><span><strong>Local demo</strong><small>Data saved in SQLite</small></span></div>
+      </div>
+    </aside>
+    <main class="main-content">
+      <header class="topbar">
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation"><i class="fa-solid fa-bars"></i></button>
+        <div class="breadcrumb"><span>Workspace</span><i class="fa-solid fa-chevron-right"></i><strong>{% block breadcrumb %}Overview{% endblock %}</strong></div>
+        <div class="topbar-right"><span class="topbar-date" id="currentDate"></span></div>
+      </header>
+      <section class="page-content">{% block content %}{% endblock %}</section>
+    </main>
+  </div>
+  <div class="toast-region" id="toastRegion" aria-live="polite"></div>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block title %}Air Traffic Control System{% endblock %}
+{% block content %}
+<div class="page-heading">
+  <div>
+    <p class="eyebrow">AIRPORT NETWORK</p>
+    <h1>Air Traffic Control System</h1>
+    <p class="subheading">Plan a connected airport network with Prim's algorithm.</p>
+  </div>
+</div>
+
+<div class="stats-grid dashboard-stats">
+  <article class="stat-card">
+    <span class="stat-icon blue"><i class="fa-solid fa-tower-observation"></i></span>
+    <p>Total airports</p>
+    <strong id="statAirports">—</strong>
+  </article>
+  <article class="stat-card">
+    <span class="stat-icon cyan"><i class="fa-solid fa-route"></i></span>
+    <p>Total flight routes</p>
+    <strong id="statRoutes">—</strong>
+  </article>
+  <article class="stat-card">
+    <span class="stat-icon green"><i class="fa-solid fa-arrows-left-right-to-line"></i></span>
+    <p>Minimum network distance</p>
+    <strong id="statDistance">—</strong>
+  </article>
+</div>
+
+<section class="panel optimizer-panel">
+  <div class="panel-heading">
+    <div>
+      <p class="eyebrow">NETWORK PLANNING</p>
+      <h2>Calculate the optimal route</h2>
+    </div>
+    <span class="mini-icon"><i class="fa-solid fa-plane"></i></span>
+  </div>
+  <p class="panel-copy">Choose a starting airport. Restricted routes are ignored.</p>
+  <div class="optimizer-controls">
+    <label class="field-label" for="startAirport">Starting airport</label>
+    <select class="form-control" id="startAirport">
+      <option value="">Loading airports…</option>
+    </select>
+    <button class="button button-primary" id="optimizeButton" type="button">
+      Calculate optimal route
+    </button>
+  </div>
+  <div class="optimization-result" id="optimizationResult" hidden aria-live="polite"></div>
+  <p class="optimizer-note">Prim's algorithm finds the minimum spanning tree using available flight routes.</p>
+</section>
+
+<div class="dashboard-lists">
+  <section class="panel">
+    <div class="panel-heading">
+      <div>
+        <p class="eyebrow">NETWORK AIRPORTS</p>
+        <h2>Airport list</h2>
+      </div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>AIRPORT</th><th>CODE</th><th>LOCATION</th></tr></thead>
+        <tbody id="airportList"><tr><td colspan="3" class="empty-state">Loading airports…</td></tr></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="panel">
+    <div class="panel-heading">
+      <div>
+        <p class="eyebrow">NETWORK CONNECTIONS</p>
+        <h2>Flight routes</h2>
+      </div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>ORIGIN</th><th>DESTINATION</th><th>DISTANCE</th><th>STATUS</th></tr></thead>
+        <tbody id="recentRoutes"><tr><td colspan="4" class="empty-state">Loading routes…</td></tr></tbody>
+      </table>
+    </div>
+  </section>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+{% endblock %}

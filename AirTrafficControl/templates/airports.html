@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Airport management{% endblock %}
+{% block breadcrumb %}Airports{% endblock %}
+{% block content %}
+<div class="page-heading"><div><p class="eyebrow">NETWORK CONFIGURATION <span class="eyebrow-line"></span> AIRPORTS</p><h1>Airport management<span class="heading-period">.</span></h1><p class="subheading">Manage the airports that make up your airspace network.</p></div><button class="button button-primary" id="openAirportForm"><i class="fa-solid fa-plus"></i> Add airport</button></div>
+<section class="panel management-panel">
+  <div class="panel-heading panel-heading-wrap"><div><p class="eyebrow">NETWORK NODES</p><h2>All airports <span class="count-badge" id="airportCount">0</span></h2></div><label class="search-box"><i class="fa-solid fa-magnifying-glass"></i><input id="airportSearch" type="search" placeholder="Search airports…" aria-label="Search airports"></label></div>
+  <div class="table-wrap"><table><thead><tr><th>AIRPORT</th><th>CODE</th><th>CAPACITY</th><th>LOCATION</th><th>ACTIONS</th></tr></thead><tbody id="airportsTable"><tr><td colspan="5" class="empty-state">Loading airports…</td></tr></tbody></table></div>
+</section>
+<dialog class="modal" id="airportDialog"><form id="airportForm">
+  <div class="modal-heading"><div><p class="eyebrow">NETWORK NODE</p><h2>Add an airport</h2></div><button class="icon-button" type="button" data-close-dialog aria-label="Close dialog"><i class="fa-solid fa-xmark"></i></button></div>
+  <label class="field-label" for="airportName">Airport name</label><input class="form-control" id="airportName" name="name" required maxlength="80" placeholder="e.g. Hyderabad">
+  <div class="form-row"><div><label class="field-label" for="airportCode">Airport code</label><input class="form-control uppercase" id="airportCode" name="code" required minlength="3" maxlength="5" pattern="[A-Za-z0-9]{3,5}" placeholder="HYD"></div><div><label class="field-label" for="airportCapacity">Capacity</label><input class="form-control" id="airportCapacity" name="capacity" type="number" min="1" step="1" required placeholder="75"></div></div>
+  <label class="field-label" for="airportLocation">Location</label><input class="form-control" id="airportLocation" name="location" required maxlength="120" placeholder="Hyderabad, India">
+  <div class="modal-actions"><button class="button button-secondary" type="button" data-close-dialog>Cancel</button><button class="button button-primary" type="submit">Add airport</button></div>
+</form></dialog>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>{% endblock %}
